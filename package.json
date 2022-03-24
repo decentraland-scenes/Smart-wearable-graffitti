@@ -14,7 +14,7 @@
     "decentraland-ecs": "next"
   },
   "dependencies": {
-    "@dcl/ui-scene-utils": "^1.8.1"
+    "@dcl/ui-scene-utils": "latest"
   },
   "bundleDependencies": [
     "@dcl/ui-scene-utils"

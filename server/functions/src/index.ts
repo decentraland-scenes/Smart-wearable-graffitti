@@ -47,7 +47,7 @@ enum stencilType {
 
 export function checkBannedIPs(req: any, res: any) {
   for (let ip of blackListedIPS) {
-    if (req.header('X-Forwarded-For') == ip)
+    if (req.header('X-Forwarded-For') === ip)
       return res.status(200).send({ success: false, reason: 'Blocked IP' })
   }
 
@@ -123,7 +123,7 @@ app.post('/add-stencil', async (req: any, res: any) => {
     if (!TESTS_ENABLED) {
       let parcel = await checkPlayerPos(author, server, realm, xCoord, yCoord)
 
-      if (parcel == false) {
+      if (parcel === false) {
         return res
           .status(500)
           .send({ success: false, reason: 'player not in reported location' })

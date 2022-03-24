@@ -6,5 +6,5 @@
     ],
     "base": "0,0"
   },
-  "requiredPermissions": []
+  "requiredPermissions": ["USE_FETCH", "OPEN_EXTERNAL_LINK"]
 }

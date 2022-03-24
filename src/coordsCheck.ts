@@ -48,7 +48,7 @@ export class CoordsCheck implements ISystem {
       for (let i = 0; i < loadedCoords.length; i++) {
         if (checkDistance(currentCoords, loadedCoords[i]) > MAX_RANGE) {
           for (let j = 0; j < graffitis.length; j++) {
-            if (graffitis[j].coords == loadedCoords[i]) {
+            if (graffitis[j].coords === loadedCoords[i]) {
               log('REMOVING LOADED GRAFFITIS')
               // remove paintings
               engine.removeEntity(graffitis[j])
@@ -69,8 +69,8 @@ export class CoordsCheck implements ISystem {
         let coordIsNew: boolean = true
         for (let coordinate of loadedCoords) {
           if (
-            currentCoords.x == coordinate.x &&
-            currentCoords.y == coordinate.y
+            currentCoords.x === coordinate.x &&
+            currentCoords.y === coordinate.y
           ) {
             coordIsNew = false
             break

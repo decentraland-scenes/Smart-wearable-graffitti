@@ -30,7 +30,7 @@ export async function checkPlayerPos(
   xCoord: number,
   yCoord: number
 ) {
-  if (server == 'localhost' && realm == 'stub' && TESTS_ENABLED) {
+  if (server === 'localhost' && realm === 'stub' && TESTS_ENABLED) {
     return true
   }
 
@@ -44,7 +44,7 @@ export async function checkPlayerPos(
     let data = await response.json()
 
     for (let player of data) {
-      if (player.address.toLowerCase() == id.toLowerCase()) {
+      if (player.address.toLowerCase() === id.toLowerCase()) {
         console.log('found player')
 
         if (matchChoords(player.parcel, xCoord, yCoord, 2)) {

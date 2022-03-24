@@ -52,7 +52,7 @@ export class Graffiti extends Entity {
       })
     )
 
-    if (type == stencilType.NFT) {
+    if (type === stencilType.NFT) {
       this.addComponent(new NFTShape(image, { style: PictureFrameStyle.None }))
       // rotate to compensate
       this.getComponent(Transform).rotate(new Vector3(0, 0, 1), 180)
@@ -76,7 +76,7 @@ export class Graffiti extends Entity {
 
 export function findOrAddImage(url: string) {
   for (let i = 0; i > textureURLs.length; i++) {
-    if (url == textureURLs[i]) {
+    if (url === textureURLs[i]) {
       return i
     }
   }
@@ -90,7 +90,7 @@ export function findOrAddImage(url: string) {
 export function displayGraffiti(stencil: StencilData, coords: coord) {
   log('drawing graffiti at', stencil.position)
 
-  if (stencil.type && stencil.type == stencilType.NFT && stencil.nft) {
+  if (stencil.type && stencil.type === stencilType.NFT && stencil.nft) {
     let graffiti = new Graffiti(
       stencil.nft,
       stencil.position,

@@ -32,14 +32,14 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (event) => {
       coords: currentCoords,
       type: mode,
       image:
-        mode == stencilType.URL
+        mode === stencilType.URL
           ? textureURLs[selectedGraffiti]
           : nftIds[selectedGraffiti],
     })
 
     postStencil(
-      mode == stencilType.URL ? textureURLs[selectedGraffiti] : undefined,
-      mode == stencilType.NFT ? nftIds[selectedGraffiti] : undefined,
+      mode === stencilType.URL ? textureURLs[selectedGraffiti] : undefined,
+      mode === stencilType.NFT ? nftIds[selectedGraffiti] : undefined,
       mode,
       currentCoords.x,
       currentCoords.y,
