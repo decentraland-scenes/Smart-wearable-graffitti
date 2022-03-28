@@ -3,7 +3,7 @@ import {
   findOrAddImage,
   Graffiti,
   graffitis,
-  textures,
+  textures
 } from './graffiti'
 import { getStencils } from './serverHandler'
 
@@ -11,7 +11,7 @@ import { getStencils } from './serverHandler'
 // export let yCoord: number = 0
 export let currentCoords: coord = { x: 0, y: 0 }
 
-export let fieldOfView: coord[] = [
+export const fieldOfView: coord[] = [
   { x: 0, y: 0 },
   { x: 1, y: 1 },
   { x: 0, y: 1 },
@@ -20,14 +20,14 @@ export let fieldOfView: coord[] = [
   { x: -1, y: 0 },
   { x: 1, y: -1 },
   { x: 0, y: -1 },
-  { x: -1, y: -1 },
+  { x: -1, y: -1 }
 ]
 
-let MAX_RANGE = 4
+const MAX_RANGE = 4
 
 export type coord = { x: number; y: number }
 
-export let loadedCoords: coord[] = []
+export const loadedCoords: coord[] = []
 
 // system
 
@@ -61,13 +61,13 @@ export class CoordsCheck implements ISystem {
       }
 
       // check field of view
-      for (let visibleCoord of fieldOfView) {
-        let resultingCoord: coord = {
+      for (const visibleCoord of fieldOfView) {
+        const resultingCoord: coord = {
           x: (currentCoords.x += visibleCoord.x),
-          y: (currentCoords.y += visibleCoord.y),
+          y: (currentCoords.y += visibleCoord.y)
         }
         let coordIsNew: boolean = true
-        for (let coordinate of loadedCoords) {
+        for (const coordinate of loadedCoords) {
           if (
             currentCoords.x === coordinate.x &&
             currentCoords.y === coordinate.y
@@ -78,11 +78,11 @@ export class CoordsCheck implements ISystem {
         }
         if (coordIsNew) {
           loadedCoords.push({ x: resultingCoord.x, y: resultingCoord.y })
-          let response = await getStencils(currentCoords.x, currentCoords.y)
+          const response = await getStencils(currentCoords.x, currentCoords.y)
 
           // paint
           if (response) {
-            for (let stencil of response) {
+            for (const stencil of response) {
               displayGraffiti(stencil, currentCoords)
             }
           }
@@ -96,9 +96,9 @@ engine.addSystem(new CoordsCheck(3))
 // remove far away coords from loadedcords
 
 export function getCurrentCoords() {
-  let pos = Camera.instance.position.clone()
+  const pos = Camera.instance.position.clone()
 
-  let coords: coord = { x: Math.floor(pos.x / 16), y: Math.floor(pos.z / 16) }
+  const coords: coord = { x: Math.floor(pos.x / 16), y: Math.floor(pos.z / 16) }
 
   return coords
 }

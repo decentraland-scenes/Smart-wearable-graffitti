@@ -5,27 +5,27 @@ export let mode: stencilType = stencilType.URL
 
 export let selectedGraffiti = 0
 
-export let nftIds: string[] = []
+export const nftIds: string[] = []
 
-export let textureURLs: string[] = []
+export const textureURLs: string[] = []
 textureURLs.push('assets/dcl.jpg')
 textureURLs.push('assets/icon.png')
 
-export let textures: Texture[] = []
+export const textures: Texture[] = []
 
-for (let textureURL of textureURLs) {
+for (const textureURL of textureURLs) {
   textures.push(new Texture(textureURL))
 }
 
-export let materials: Material[] = []
+export const materials: Material[] = []
 
-for (let texture of textures) {
-  let newMaterial = new Material()
+for (const texture of textures) {
+  const newMaterial = new Material()
   newMaterial.albedoTexture = texture
   materials.push(newMaterial)
 }
 
-export let graffitis: Graffiti[] = []
+export const graffitis: Graffiti[] = []
 
 export class Graffiti extends Entity {
   coords: coord
@@ -43,12 +43,7 @@ export class Graffiti extends Entity {
     this.addComponent(
       new Transform({
         position: position,
-        rotation: new Quaternion(
-          rotation.x,
-          rotation.y,
-          rotation.z,
-          rotation.w
-        ),
+        rotation: new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w)
       })
     )
 
@@ -59,7 +54,7 @@ export class Graffiti extends Entity {
       this.type = stencilType.NFT
     } else {
       this.addComponent(new PlaneShape())
-      let imageIndex = findOrAddImage(image)
+      const imageIndex = findOrAddImage(image)
       this.addComponent(materials[imageIndex])
       this.type = stencilType.URL
     }
@@ -91,15 +86,15 @@ export function displayGraffiti(stencil: StencilData, coords: coord) {
   log('drawing graffiti at', stencil.position)
 
   if (stencil.type && stencil.type === stencilType.NFT && stencil.nft) {
-    let graffiti = new Graffiti(
+    const graffiti = new Graffiti(
       stencil.nft,
       stencil.position,
       coords,
       stencil.rotation
     )
   } else if (stencil.url) {
-    let textureId = findOrAddImage(stencil.url)
-    let graffiti = new Graffiti(
+    const textureId = findOrAddImage(stencil.url)
+    const graffiti = new Graffiti(
       textureURLs[textureId],
       stencil.position,
       coords,
@@ -111,7 +106,7 @@ export function displayGraffiti(stencil: StencilData, coords: coord) {
 export function addGraffitiImage(url: string, makeCurrent?: boolean) {
   textureURLs.push(url)
   textures.push(new Texture(textureURLs[textureURLs.length - 1]))
-  let newMaterial = new Material()
+  const newMaterial = new Material()
   newMaterial.albedoTexture = textures[textures.length - 1]
   materials.push(newMaterial)
 

@@ -12,7 +12,8 @@
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
-    "decentraland-ecs": "next"
+	"@dcl/eslint-config": "^1.0.1",
+    "decentraland-ecs": "latest"
   },
   "dependencies": {
     "@dcl/ui-scene-utils": "latest"

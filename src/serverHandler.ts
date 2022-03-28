@@ -2,10 +2,10 @@ import { getUserData, UserData } from '@decentraland/Identity'
 import {
   getCurrentRealm,
   isPreviewMode,
-  Realm,
+  Realm
 } from '@decentraland/EnvironmentAPI'
 
-export let sceneMessageBus = new MessageBus()
+export const sceneMessageBus = new MessageBus()
 
 export let userData: UserData
 export let playerRealm: Realm
@@ -22,10 +22,10 @@ export type StencilData = {
 
 export enum stencilType {
   NFT = 'nft',
-  URL = 'url',
+  URL = 'url'
 }
 
-export let fireBaseServer =
+export const fireBaseServer =
   'https://us-central1-dclportableexp.cloudfunctions.net/app/'
 
 export async function setUserData() {
@@ -37,7 +37,7 @@ export async function setUserData() {
 
 // fetch the player's realm
 export async function setRealm() {
-  let realm = await getCurrentRealm()
+  const realm = await getCurrentRealm()
   if (!realm) return
   log(`You are in the realm: ${JSON.stringify(realm.displayName)}`)
   playerRealm = realm
@@ -61,8 +61,8 @@ export async function getStencils(
     '&realm=' +
     playerRealm.layer
   try {
-    let response = await fetch(url)
-    let json = await response.json()
+    const response = await fetch(url)
+    const json = await response.json()
     log('New stencils: ', json, ' from URL: ', url)
     if (json.success) {
       return json.stencils.stencils
@@ -93,7 +93,7 @@ export async function postStencil(
 
   const url = fireBaseServer + 'add-stencil'
 
-  let body = {
+  const body = {
     url: stencilURL,
     nft: stencilNFT,
     type: type,
@@ -104,16 +104,16 @@ export async function postStencil(
     author: userData.displayName,
     timeStamp: Date.now(),
     server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    realm: playerRealm.layer
   }
 
   try {
-    let response = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body)
     })
-    let json = await response.json()
+    const json = await response.json()
     log('New stencils: ', json)
     return json
   } catch {
@@ -124,8 +124,8 @@ export async function postStencil(
 export async function fetchFromOpenSea(contractAndId: string) {
   const url = 'https://api.opensea.io/api/v1/asset/' + contractAndId + '/'
   try {
-    let response = await fetch(url)
-    let json = await response.json()
+    const response = await fetch(url)
+    const json = await response.json()
 
     if (json.image_preview_url) {
       return json.image_preview_url

@@ -2,7 +2,7 @@ import {
   checkDistance,
   coord,
   currentCoords,
-  getCurrentCoords,
+  getCurrentCoords
 } from './coordsCheck'
 import {
   DummyEnt,
@@ -11,20 +11,20 @@ import {
   nftIds,
   selectedGraffiti,
   textures,
-  textureURLs,
+  textureURLs
 } from './graffiti'
 import { postStencil, sceneMessageBus, stencilType } from './serverHandler'
 import { addUI } from './ui'
 
 Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (event) => {
   if (event.hit && event.hit.entityId !== '' && event.hit.length < 8) {
-    let offset = Vector3.Normalize(
+    const offset = Vector3.Normalize(
       Camera.instance.position.clone().subtract(event.hit.hitPoint.clone())
     ).scale(0.1)
 
-    let finalPosition = event.hit.hitPoint.add(offset)
+    const finalPosition = event.hit.hitPoint.add(offset)
 
-    let dummy = new DummyEnt(finalPosition, event.hit.normal)
+    const dummy = new DummyEnt(finalPosition, event.hit.normal)
 
     sceneMessageBus.emit('paintGraffiti', {
       position: dummy.getComponent(Transform).position,
@@ -34,7 +34,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (event) => {
       image:
         mode === stencilType.URL
           ? textureURLs[selectedGraffiti]
-          : nftIds[selectedGraffiti],
+          : nftIds[selectedGraffiti]
     })
 
     postStencil(
@@ -45,7 +45,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (event) => {
       currentCoords.y,
       dummy.getComponent(Transform).position,
       dummy.getComponent(Transform).rotation
-    )
+    ).catch((error) => log(error))
   } else {
     log('No wall to paint on')
   }
@@ -74,7 +74,7 @@ sceneMessageBus.on('paintGraffiti', (e) => {
 
 addUI()
 
-let testCube = new Entity()
+const testCube = new Entity()
 testCube.addComponent(
   new Transform({ position: new Vector3(4, 2, 4), scale: new Vector3(8, 8, 8) })
 )
