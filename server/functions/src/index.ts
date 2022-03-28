@@ -52,8 +52,8 @@ export function checkBannedIPs(req: any, res: any) {
   }
 
   if (
-    req.header('origin') != 'https://play.decentraland.org' &&
-    req.header('origin') != 'https://play.decentraland.zone' &&
+    req.header('origin') !== 'https://play.decentraland.org' &&
+    req.header('origin') !== 'https://play.decentraland.zone' &&
     !TESTS_ENABLED
   ) {
     return res.status(200).send({ success: false, reason: 'Blocked Domain' })

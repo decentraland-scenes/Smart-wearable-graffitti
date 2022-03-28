@@ -17,7 +17,7 @@ import { postStencil, sceneMessageBus, stencilType } from './serverHandler'
 import { addUI } from './ui'
 
 Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, true, (event) => {
-  if (event.hit && event.hit.entityId != '' && event.hit.length < 8) {
+  if (event.hit && event.hit.entityId !== '' && event.hit.length < 8) {
     let offset = Vector3.Normalize(
       Camera.instance.position.clone().subtract(event.hit.hitPoint.clone())
     ).scale(0.1)
