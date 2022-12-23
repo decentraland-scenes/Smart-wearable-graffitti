@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase": "^8.2.9",
-    "firebase-admin": "^9.5.0",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.13.2"
   },
   "devDependencies": {
